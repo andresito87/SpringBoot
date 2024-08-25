@@ -14,8 +14,8 @@ spring:
       client:
         registration:
           football-gmail:
-            client-id: "213005583957-2537pgdde6c58avvcmh9ckv36vsa6li6.apps.googleusercontent.com"
-            client-secret: "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"
+            client-id: "your id"
+            client-secret: "your secret"
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             authorization-grant-type: authorization_code
             scope: openid,profile,email
