@@ -1,4 +1,4 @@
-package com.prueba.footballui;
+package com.prueba.footballui.controller;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

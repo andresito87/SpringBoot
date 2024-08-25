@@ -10,9 +10,19 @@ spring:
     user:
       name: "user"
       password: "password"
-      roles:
-        - "ADMIN"
     oauth2:
+      client:
+        registration:
+          football-gmail:
+            client-id: "213005583957-2537pgdde6c58avvcmh9ckv36vsa6li6.apps.googleusercontent.com"
+            client-secret: "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"
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            scope: openid,profile,email
+        provider:
+          football-gmail:
+            issuer-uri: https://accounts.google.com
+            user-name-attribute: given_name
       authorizationserver:
         client:
           football:
@@ -26,3 +36,21 @@ spring:
               scopes:
                 - "football:read"
                 - "football:admin"
+          football-ui:
+            registration:
+              client-id: "football-ui"
+              client-secret: "{noop}TheSecretSauce"
+              client-authentication-methods:
+                - "client_secret_basic"
+              authorization-grant-types:
+                - "authorization_code"
+                - "refresh_token"
+                - "client_credentials"
+              redirect-uris:
+                - "http://localhost:9080/login/oauth2/code/football-ui"
+              scopes:
+                - "openid"
+                - "profile"
+                - "football:read"
+                - "football:admin"
+            require-authorization-consent: true

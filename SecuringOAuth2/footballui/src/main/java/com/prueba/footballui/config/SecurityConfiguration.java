@@ -1,4 +1,4 @@
-package com.prueba.footballui;
+package com.prueba.footballui.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,14 +11,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
     @Bean
-    public SecurityFilterChain
-    defaultSecurityFilterChain(HttpSecurity http)
+    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
             throws Exception {
-        http.authorizeHttpRequests(
-                        (authorize) -> authorize
-                                .requestMatchers("/").permitAll()
-                                .anyRequest().authenticated())
+
+        http
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/").permitAll()
+                        .anyRequest().authenticated())
                 .oauth2Login(Customizer.withDefaults());
+
         return http.build();
     }
+
 }
