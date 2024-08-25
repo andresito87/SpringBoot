@@ -1,0 +1,16 @@
+springdoc:
+    default-produces-media-type: application/json
+
+logging:
+  level:
+    root: INFO
+
+server:
+  port: 8080
+  servlet:
+    context-path: "/${spring.application.api-version}"
+
+spring:
+  application:
+    name: football-api
+    api-version: "api/v1"
