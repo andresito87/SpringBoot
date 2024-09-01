@@ -1,4 +1,5 @@
 package com.example.fooballclient.domain;
 
-public class PlayerRanking {
+public record PlayerRanking(String player, int ranking) {
+
 }

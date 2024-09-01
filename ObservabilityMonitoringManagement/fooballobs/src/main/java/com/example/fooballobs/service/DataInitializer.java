@@ -1,4 +1,4 @@
-package com.example.fooballobs;
+package com.example.fooballobs.service;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataInitializer implements ApplicationRunner {
 
-    private FileLoader fileLoader;
+    private final FileLoader fileLoader;
 
     public DataInitializer(FileLoader fileLoader) {
         this.fileLoader = fileLoader;
