@@ -4,7 +4,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
+import static org.hamcrest.core.IsNot.not;
 
+import com.andres.footballpg_hibernate.entity.Player;
 import com.andres.footballpg_hibernate.entity.Team;
 import com.andres.footballpg_hibernate.service.FootballService;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,6 +20,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.util.List;
 
 @SpringBootTest
 @Testcontainers
@@ -33,11 +38,7 @@ public class FootballServiceTest {
             TestPropertyValues.of(
                             "spring.datasource.url=" + postgreSQLContainer.getJdbcUrl(),
                             "spring.datasource.username=" + postgreSQLContainer.getUsername(),
-                            "spring.datasource.password=" + postgreSQLContainer.getPassword(),
-                            "spring.jpa.hibernate.ddl-auto=create-drop",
-                            "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect",
-                            "spring.jpa.show-sql=true", 
-                            "spring.jpa.properties.jpa.defer-datasource-initialization: true")
+                            "spring.datasource.password=" + postgreSQLContainer.getPassword())
                     .applyTo(configurableApplicationContext.getEnvironment());
         }
     }
@@ -75,4 +76,11 @@ public class FootballServiceTest {
         assertThat(footballService.getTeam(9999999), nullValue());
     }
 
+    @Test
+    public void getPlayers(){
+        List<Player> players = footballService.searchPlayers("Adriana");
+        assertThat(players, not(empty()));
+    }
+
 }
+
