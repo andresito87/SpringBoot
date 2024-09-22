@@ -57,13 +57,7 @@ public class FootballService {
     }
 
     public Team createTeam(String name) {
-        Random random = new Random();
         TeamEntity team = new TeamEntity();
-        Integer randomId = random.nextInt();
-        if (randomId < 0) {
-            randomId = random.nextInt();
-        }
-        team.setId(randomId);
         team.setName(name);
         team = teamRepository.save(team);
         return new Team(team.getId(), team.getName(), List.of());

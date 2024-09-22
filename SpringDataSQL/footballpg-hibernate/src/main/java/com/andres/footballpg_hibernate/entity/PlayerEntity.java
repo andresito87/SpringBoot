@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class PlayerEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer jerseyNumber;
     private String name;
