@@ -3,6 +3,7 @@ package com.andres.footballpg_hibernate.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Table(name = "players")
 @Entity
@@ -16,9 +17,15 @@ public class PlayerEntity {
     private String position;
     private LocalDate dateOfBirth;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private TeamEntity team;
+
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    private List<CardEntity> cards;
+
+    private Integer height;
+    private Integer weight;
 
     public Integer getId() {
         return id;
@@ -66,6 +73,18 @@ public class PlayerEntity {
 
     public void setTeam(TeamEntity team) {
         this.team = team;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 
 }

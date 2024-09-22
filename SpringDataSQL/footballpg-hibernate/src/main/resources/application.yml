@@ -2,7 +2,8 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
-#    generate-ddl: true
+  # show-sql: true
+  #    generate-ddl: true
 #    defer-datasource-initialization: true
 #    hibernate:
 #      ddl-auto: update
@@ -13,3 +14,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/football3
     username: packt
     password: packt
+  flyway:
+    out-of-order: true
+#logging:
+#  level: 
+#    org:
+#      springframework: DEBUG
+#      flywaydb: DEBUG
+#      hibernate: DEBUG
+#      hibernate.type.descriptor.sql.BasicBinder: TRACE

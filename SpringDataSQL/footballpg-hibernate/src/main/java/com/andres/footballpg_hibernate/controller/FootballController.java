@@ -1,5 +1,6 @@
 package com.andres.footballpg_hibernate.controller;
 
+import com.andres.footballpg_hibernate.dto.TeamPlayers;
 import com.andres.footballpg_hibernate.entity.Player;
 import com.andres.footballpg_hibernate.entity.Team;
 import com.andres.footballpg_hibernate.service.FootballService;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/football")
 @RestController
@@ -70,6 +72,53 @@ public class FootballController {
     @PutMapping("/player/{id}/position")
     public Player updatePlayerPosition(@PathVariable Integer id, @RequestBody String position) {
         return footballService.updatePlayerPosition(id, position);
+    }
+
+    @GetMapping("/matches/{id}/players")
+    public List<Player> getPlayersByMatch(@PathVariable Integer id) {
+        return footballService.getPlayersByMatch(id);
+    }
+
+    @GetMapping("/albums/{id}/{teamId}/players")
+    public List<Player> getAlbumTeamPlayers(@PathVariable Integer id, @PathVariable Integer teamId) {
+        return footballService.getAlbumPlayersByTeam(id, teamId);
+    }
+
+    @GetMapping("/albums/{id}/missingplayers")
+    public List<Player> getAlbumMissingPlayers(@PathVariable Integer id) {
+        return footballService.getAlbumMissingPlayers(id);
+    }
+
+    @GetMapping("/albums/{id}/myplayers")
+    public List<Player> getAlbumMyPlayers(@PathVariable Integer id) {
+        return footballService.getAlbumPlayers(id);
+    }
+
+    @GetMapping("/players/list")
+    public List<Player> getPlayersList(@RequestParam List<Integer> players) {
+        return footballService.getPlayersList(players);
+    }
+
+    @GetMapping("/players/startwith")
+    public List<Player> searchPlayersStartingWith(@RequestParam String startingName) {
+        return footballService.searchPlayersStartingWith(startingName);
+    }
+
+    @GetMapping("/players/search")
+    public List<Player> searchPlayersLike(@RequestParam String q) {
+        return footballService.searchPlayersLike(q);
+    }
+
+    @GetMapping("/players/paginated")
+    public List<Player> getPlayers(@RequestParam Map<String, String> params) {
+        Integer page = Integer.parseInt(params.getOrDefault("page", "0"));
+        Integer size = Integer.parseInt(params.getOrDefault("size", "10"));
+        return footballService.getAllPlayersPaged(page, size);
+    }
+
+    @GetMapping("/teams/{position}/count")
+    public List<TeamPlayers> getNumberOfPlayersByPosition(@PathVariable String position) {
+        return footballService.getNumberOfPlayersByPosition(position);
     }
 
 }
